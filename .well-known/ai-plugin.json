@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "AOVB Real Estate Connect",
+  "name_for_model": "aovb_real_estate_connect",
+  "description_for_human": "API jurídica-imobiliária que interpreta matrículas e retorna análise sobre titularidade, averbações e riscos.",
+  "description_for_model": "Interpreta textos de matrícula imobiliária e retorna informações estruturadas sobre titular, localização e riscos jurídicos.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://aovb-fastapi-3.onrender.com/openapi.json"
+  },
+  "logo_url": "https://aovb-fastapi-3.onrender.com/logo.png",
+  "contact_email": "suporte@aovb.com",
+  "legal_info_url": "https://aovb.com/termos"
+}
