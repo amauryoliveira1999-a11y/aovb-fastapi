@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aurora RC7 – AOVB Connect</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🌐 Aurora RC7 – AOVB Connect</h1>
+  <form action="/memory/store" method="post">
+    <textarea name="entry" placeholder="Digite uma nova memória..."></textarea>
+    <button type="submit">Salvar Memória</button>
+  </form>
+  <h2>Memórias armazenadas</h2>
+  <ul>
+    {% for m in memories %}
+      <li>{{ m.entry }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
