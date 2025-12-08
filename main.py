@@ -34,5 +34,8 @@ async def retrieve_memory():
 
 @app.get("/drive/sync")
 async def sync_drive():
-    drive_connector.sync_memory(memory_manager.memory_file)
-    return {"message": "Sincronização com o Google Drive concluída."}
+    result = drive_connector.sync_memory(memory_manager.memory_file)
+    return {
+        "message": "Sincronização completa com o Google Drive.",
+        **result,
+    }
