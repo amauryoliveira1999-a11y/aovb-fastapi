@@ -2,7 +2,6 @@ fastapi
 uvicorn
 jinja2
 pydantic
-requests
-openai
-python-dotenv
 python-multipart
+google-api-python-client
+google-auth
