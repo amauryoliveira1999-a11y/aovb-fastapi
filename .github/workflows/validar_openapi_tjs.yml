@@ -9,26 +9,19 @@ jobs:
 
     steps:
       - name: Checkout do repositório
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Instalar Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Debug Node/NPM
+      - name: Validar OpenAPI (IBM OpenAPI Validator via Docker)
         run: |
-          echo "=== Node/NPM/NPX versions ==="
-          node --version
-          npm --version
-          npx --version || echo "npx não encontrado"
-
-      - name: Verificar se o arquivo OpenAPI existe
-        run: |
-          if [ ! -f ./schemas/openapi_tjs.yaml ]; then
-            echo "❌ Arquivo OpenAPI não encontrado em ./schemas/openapi_tjs.yaml"
+          set -euo pipefail
+          SPEC="schemas/openapi_tjs.yaml"
+          if [ ! -f "$SPEC" ]; then
+            echo "❌ Arquivo OpenAPI não encontrado: $SPEC"
             exit 1
           fi
-
-      - name: Rodar validação do schema (usando npx)
-        run: npx -y ibm-openapi-validator ./schemas/openapi_tjs.yaml
+          echo "✅ Validando: $SPEC"
+          docker run --rm \
+            -v "$PWD:/data:ro" \
+            -w /data \
+            ibmdevxsdk/openapi-validator:1.37.9 \
+              "$SPEC"
