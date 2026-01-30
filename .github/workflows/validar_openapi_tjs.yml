@@ -16,7 +16,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Instalar dependências e validar schema
+      - name: Instalar e rodar IBM OpenAPI Validator via NPX
         run: |
-          npm install ibm-openapi-validator
-          npx openapi-validator ./schemas/openapi_tjs.yaml
+          npx --yes ibm-openapi-validator ./schemas/openapi_tjs.yaml
