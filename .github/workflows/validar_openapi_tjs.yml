@@ -15,7 +15,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
+
+      - name: Debug Node/NPM
+        run: |
+          echo "=== Node/NPM/NPX versions ==="
+          node --version
+          npm --version
+          npx --version || echo "npx não encontrado"
 
       - name: Verificar se o arquivo OpenAPI existe
         run: |
