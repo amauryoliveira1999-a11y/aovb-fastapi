@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: API do Tribunal de Justiça Exemplo
+  description: Esta é uma API de exemplo para validação com o IBM OpenAPI Validator.
+  version: "1.0.0"
+
+servers:
+  - url: https://api.tjexemplo.gov.br/v1
+
+paths:
+  /processos:
+    get:
+      summary: Lista todos os processos
+      operationId: listarProcessos
+      responses:
+        '200':
+          description: Lista de processos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Processo'
+
+components:
+  schemas:
+    Processo:
+      type: object
+      required:
+        - id
+        - numero
+        - status
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 123456
+        numero:
+          type: string
+          example: "0001234-56.2023.8.26.0000"
+        status:
+          type: string
+          enum: [em_andamento, julgado, arquivado]
+          example: em_andamento
