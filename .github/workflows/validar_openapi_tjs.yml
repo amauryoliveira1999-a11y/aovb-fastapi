@@ -15,6 +15,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
 
       - name: Verificar se o arquivo OpenAPI existe
         run: |
@@ -23,5 +24,13 @@ jobs:
             exit 1
           fi
 
-      - name: Rodar validação do schema (usando npx)
-        run: npx -y ibm-openapi-validator ./schemas/openapi_tjs.yaml
+      - name: Instalar ibm-openapi-validator globalmente
+        run: npm install -g ibm-openapi-validator
+
+      - name: Verificar openapi-validator
+        run: |
+          which openapi-validator || echo "openapi-validator não está no PATH"
+          openapi-validator --version || true
+
+      - name: Rodar validação do schema
+        run: openapi-validator ./schemas/openapi_tjs.yaml
