@@ -1,4 +1,4 @@
-name:name: Validar OpenAPI dos TJs Estaduais
+name: Validar OpenAPI dos TJs Estaduais
 
 on:
   workflow_dispatch:
