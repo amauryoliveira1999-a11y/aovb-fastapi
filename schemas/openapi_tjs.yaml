@@ -1,44 +1,165 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
-  title: API do Tribunal de Justiça Exemplo
-  description: Esta é uma API de exemplo para validação com o IBM OpenAPI Validator.
+  title: Consulta CPF/CNPJ em TJs Estaduais (via DataJud CNJ) - Proxy
   version: "1.0.0"
-
+  description: >
+    API proxy: recebe CPF/CNPJ e consulta todos os tribunais estaduais no DataJud CNJ.
+    A Action chama APENAS este endpoint; o fan-out (todos os TJs) ocorre no backend.
 servers:
-  - url: https://api.tjexemplo.gov.br/v1
+  - url: https://SEU_DOMINIO_AQUI
+    description: Servidor da sua API (proxy)
+
+tags:
+  - name: consulta
+    description: Operações de consulta por CPF/CNPJ
 
 paths:
-  /processos:
-    get:
-      summary: Lista todos os processos
-      operationId: listarProcessos
+  /consulta:
+    post:
+      tags: [consulta]
+      operationId: consultar_documento_em_todos_tjs
+      summary: Consulta CPF/CNPJ em todos os TJs Estaduais (fan-out no backend)
+      description: >
+        Recebe CPF ou CNPJ (somente números). O backend consulta os endpoints oficiais do DataJud CNJ
+        por tribunal e retorna um resultado agregado.
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        description: Parâmetros mínimos da consulta.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsultaRequest'
+            example:
+              documento: "12345678909"
+              timeout_ms: 15000
       responses:
-        '200':
-          description: Lista de processos retornada com sucesso
+        "200":
+          description: Consulta agregada executada com sucesso.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Processo'
+                $ref: '#/components/schemas/ConsultaResponse'
+              example:
+                documento: "12345678909"
+                total_tribunais: 27
+                concluido: 27
+                falhas: 0
+                resultados:
+                  - tribunal: tjsp
+                    ok: true
+                    total_hits: 2
+                  - tribunal: tjmg
+                    ok: true
+                    total_hits: 0
+        "400":
+          $ref: '#/components/responses/ErroValidacao'
+        "401":
+          $ref: '#/components/responses/NaoAutorizado'
+        "500":
+          $ref: '#/components/responses/ErroServidor'
 
 components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Formato: "APIKey <token>"'
+
   schemas:
-    Processo:
+    ConsultaRequest:
       type: object
-      required:
-        - id
-        - numero
-        - status
+      additionalProperties: false
+      required: [documento]
       properties:
-        id:
+        documento:
+          type: string
+          description: CPF ou CNPJ (somente números).
+          minLength: 11
+          maxLength: 14
+          pattern: '^[0-9]{11,14}$'
+        timeout_ms:
           type: integer
-          format: int64
-          example: 123456
-        numero:
+          description: Timeout total (ms) para o fan-out.
+          minimum: 1000
+          maximum: 60000
+          default: 15000
+
+    ConsultaResponse:
+      type: object
+      additionalProperties: false
+      required: [documento, total_tribunais, concluido, falhas, resultados]
+      properties:
+        documento:
           type: string
-          example: "0001234-56.2023.8.26.0000"
-        status:
+        total_tribunais:
+          type: integer
+          minimum: 1
+        concluido:
+          type: integer
+          minimum: 0
+        falhas:
+          type: integer
+          minimum: 0
+        resultados:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResultadoPorTribunal'
+
+    ResultadoPorTribunal:
+      type: object
+      additionalProperties: false
+      required: [tribunal, ok, total_hits]
+      properties:
+        tribunal:
           type: string
-          enum: [em_andamento, julgado, arquivado]
-          example: em_andamento
+          description: Sigla do tribunal (ex.: tjsp, tjmg, tjrj).
+          minLength: 2
+          maxLength: 10
+        ok:
+          type: boolean
+        total_hits:
+          type: integer
+          minimum: 0
+        erro:
+          type: string
+          description: Preenchido se ok=false.
+
+    ErroPadrao:
+      type: object
+      additionalProperties: false
+      required: [mensagem]
+      properties:
+        mensagem:
+          type: string
+          minLength: 1
+
+  responses:
+    ErroValidacao:
+      description: Erro de validação do payload.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroPadrao'
+          example:
+            mensagem: Documento inválido
+
+    NaoAutorizado:
+      description: Não autorizado (API key ausente/inválida).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroPadrao'
+          example:
+            mensagem: Não autorizado
+
+    ErroServidor:
+      description: Erro interno no servidor.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroPadrao'
+          example:
+            mensagem: Erro interno
