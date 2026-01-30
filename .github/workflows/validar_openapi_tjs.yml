@@ -23,8 +23,5 @@ jobs:
             exit 1
           fi
 
-      - name: Instalar dependência ibm-openapi-validator
-        run: npm install -g ibm-openapi-validator
-
-      - name: Rodar validação do schema
-        run: openapi-validator ./schemas/openapi_tjs.yaml
+      - name: Rodar validação do schema (usando npx)
+        run: npx -y ibm-openapi-validator ./schemas/openapi_tjs.yaml
