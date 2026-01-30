@@ -17,7 +17,7 @@ jobs:
           node-version: '18'
 
       - name: Instalar openapi-validator
-        run: npm install -g @ibm-openapi-validator
+        run: npm install -g ibm-openapi-validator
 
       - name: Validar OpenAPI
         run: openapi-validator ./schemas/openapi_schema.yaml
