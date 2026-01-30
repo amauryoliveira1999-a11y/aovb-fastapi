@@ -1,6 +1,7 @@
 name: Validar OpenAPI dos TJs Estaduais
 
 on:
+  # Execução manual para validação sob demanda.
   workflow_dispatch:
 
 jobs:
