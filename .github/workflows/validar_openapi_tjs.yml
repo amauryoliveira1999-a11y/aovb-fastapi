@@ -1,0 +1,968 @@
+name: Validar OpenAPI dos TJs Estaduais
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validar-openapi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validar schema inline com chatgpt-created
+        uses: chatgpt-created/openapi-validate@v1
+        with:
+          schema: |
+            openapi: 3.1.0
+            info:
+              title: Consulta direta aos Tribunais Estaduais (DataJud CNJ)
+              version: 1.0.0
+              description: Endpoints diretos dos Tribunais de Justiça estaduais brasileiros via DataJud CNJ
+            servers:
+              - url: https://api-publica.datajud.cnj.jus.br
+                description: Servidor público do CNJ
+            paths:
+              /consulta/tjac:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Acre
+                  operationId: consultartjac
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjal:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Alagoas
+                  operationId: consultartjal
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjap:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Amapá
+                  operationId: consultartjap
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjam:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Amazonas
+                  operationId: consultartjam
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjba:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça da Bahia
+                  operationId: consultartjba
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjce:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Ceará
+                  operationId: consultartjce
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjdft:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Distrito Federal e Territórios
+                  operationId: consultartjdft
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjes:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Espírito Santo
+                  operationId: consultartjes
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjgo:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Goiás
+                  operationId: consultartjgo
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjma:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Maranhão
+                  operationId: consultartjma
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjmt:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Mato Grosso
+                  operationId: consultartjmt
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjms:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Mato Grosso do Sul
+                  operationId: consultartjms
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjmg:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Minas Gerais
+                  operationId: consultartjmg
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjpa:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Pará
+                  operationId: consultartjpa
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjpb:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça da Paraíba
+                  operationId: consultartjpb
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjpr:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Paraná
+                  operationId: consultartjpr
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjpe:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Pernambuco
+                  operationId: consultartjpe
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjpi:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Piauí
+                  operationId: consultartjpi
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjrj:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Rio de Janeiro
+                  operationId: consultartjrj
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjrn:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Rio Grande do Norte
+                  operationId: consultartjrn
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjrs:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Rio Grande do Sul
+                  operationId: consultartjrs
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjro:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Rondônia
+                  operationId: consultartjro
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjrr:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Roraima
+                  operationId: consultartjrr
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjsc:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Santa Catarina
+                  operationId: consultartjsc
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjsp:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de São Paulo
+                  operationId: consultartjsp
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjse:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça de Sergipe
+                  operationId: consultartjse
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+              /consulta/tjto:
+                get:
+                  summary: Consulta direta ao Tribunal de Justiça do Tocantins
+                  operationId: consultartjto
+                  tags:
+                    - Tribunais Estaduais
+                  parameters:
+                    - name: documento
+                      in: query
+                      required: true
+                      schema:
+                        type: string
+                      description: CPF ou CNPJ (somente números)
+                  responses:
+                    '200':
+                      description: Consulta executada com sucesso
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '400':
+                      description: Erro de validação no parâmetro
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
+                    '500':
+                      description: Erro interno no servidor
+                      content:
+                        application/json:
+                          schema:
+                            type: object
+                            properties: {}
