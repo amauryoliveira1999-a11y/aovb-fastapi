@@ -16,8 +16,15 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Verificar se o arquivo OpenAPI existe
+        run: |
+          if [ ! -f ./schemas/openapi_tjs.yaml ]; then
+            echo "❌ Arquivo OpenAPI não encontrado em ./schemas/openapi_tjs.yaml"
+            exit 1
+          fi
+
       - name: Instalar dependência ibm-openapi-validator
-        run: npm install ibm-openapi-validator
+        run: npm install -g ibm-openapi-validator
 
       - name: Rodar validação do schema
-        run: npx ibm-openapi-validator ./schemas/openapi_tjs.yaml
+        run: openapi-validator ./schemas/openapi_tjs.yaml
