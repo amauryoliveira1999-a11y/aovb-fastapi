@@ -1,4 +1,4 @@
-name: Validar OpenAPI dos TJs Estaduais
+name:name: Validar OpenAPI dos TJs Estaduais
 
 on:
   workflow_dispatch:
@@ -16,8 +16,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Instalar openapi-validator
+      - name: Instalar ibm-openapi-validator
         run: npm install -g ibm-openapi-validator
 
-      - name: Validar OpenAPI
-        run: openapi-validator ./schemas/openapi_schema.yaml
+      - name: Validar schema OpenAPI
+        run: openapi-validator ./schemas/openapi_tjs.yaml
