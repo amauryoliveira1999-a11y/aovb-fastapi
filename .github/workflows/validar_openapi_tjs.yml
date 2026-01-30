@@ -24,13 +24,5 @@ jobs:
             exit 1
           fi
 
-      - name: Instalar ibm-openapi-validator globalmente
-        run: npm install -g ibm-openapi-validator
-
-      - name: Verificar openapi-validator
-        run: |
-          which openapi-validator || echo "openapi-validator não está no PATH"
-          openapi-validator --version || true
-
-      - name: Rodar validação do schema
-        run: openapi-validator ./schemas/openapi_tjs.yaml
+      - name: Rodar validação do schema (usando npx)
+        run: npx -y ibm-openapi-validator ./schemas/openapi_tjs.yaml
